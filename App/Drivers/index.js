@@ -1,44 +1,32 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet } from 'react-native';
+import { ScrollView } from 'react-native';
 
-import Icon from 'react-native-vector-icons/Ionicons';
-import * as colors from '_config/colors';
+import DriverItem from './DriverItem';
 
 export default class DriversScreen extends Component {
+  state = {
+    drivers: _GetItems()
+  }
   render() {
     return (
-      <View style={styles.containerStyle}>
-        <Image style={styles.imageStyle} source={require('_images/img.jpg')}/>
-        <View style={styles.elementContainer}>
-          <View>
-            <Text> Driver Name</Text>
-            <Text> Matricule</Text>
-          </View>
-          <Icon name="ios-arrow-forward-outline" size={50} color={colors.dark}/>
-        </View>
-      </View>
+      <ScrollView >
+        {drivers.map((item, i) => {
+          return <DriverItem key={i} driver={item} />
+        })}
+      </ScrollView>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  containerStyle: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 15,
-    width: '100%',
-    borderRadius: 8,
-    backgroundColor: colors.grey,
-    marginBottom: 6,
-  },
-  imageStyle: {
-    // width: '40%',
-    // height: '40%',
-    resizeMode: 'contain',
-    borderRadius: 80
-  },
-  elementContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  }
-})
+_GetItems = () => {
+  return (
+    drivers = [
+      { name: 'driver01', registrationNumber: 'driver-01', posted: '03/03/2018' },
+      { name: 'driver02', registrationNumber: 'driver-02', posted: '03/03/2018' },
+      { name: 'driver03', registrationNumber: 'driver-03', posted: '03/03/2018' },
+      { name: 'driver04', registrationNumber: 'driver-04', posted: '03/03/2018' },
+      { name: 'driver05', registrationNumber: 'driver-05', posted: '03/03/2018' },
+      { name: 'driver06', registrationNumber: 'driver-06', posted: '03/03/2018' },
+    ]
+  )
+}
