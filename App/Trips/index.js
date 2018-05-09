@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, ScrollView } from 'react-native';
 
-// import * as colors from '_config/colors'
+import * as colors from '_config/colors'
 import TripItem from './TripItem';
 
 export default class TripsScreen extends Component {
@@ -10,12 +10,17 @@ export default class TripsScreen extends Component {
     trips: _GetItems()
   }
   render() {
+    const { trips } = this.state;
     return (
-      <ScrollView >
+      <ScrollView contentContainerStyle={{
+        backgroundColor: colors.grey_darker,
+        padding: 10,
+        // paddingTop: 10,
+      }}>
         {trips.map((item, i) => {
           return <TripItem key={i} trip={item} />
         })}
-      </ScrollView> 
+      </ScrollView>
     );
   }
 }

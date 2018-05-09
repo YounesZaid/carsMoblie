@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as colors from '_config/colors';
@@ -13,14 +13,14 @@ class DriverItem extends Component {
         onPress={e => alert(`${driver.name}`)}>
         <View style={styles.container}>
           <View style={styles.infosContainer}>
-            {/* <Image style={styles.imageStyle} source={require('_images/img.jpg')}/> */}
-            <Icon name="md-person" size={50} style={styles.imageStyle} />
+            <Image style={styles.imageStyle} source={require('_images/img.jpg')}/>
+            {/* <Icon name="ios-contact" size={55} style={styles.imageStyle} /> */}
             <View>
               <Text style={styles.nameStyle}>{driver.name}</Text>
               <Text style={styles.registrationStyle}>{driver.registrationNumber}</Text>
             </View>
           </View>
-          <Icon name="ios-arrow-forward-outline" size={50} color={colors.dark} />
+          <Icon name="ios-arrow-forward-outline" size={40} color="#dbdbdb"/>
         </View>
       </TouchableOpacity>
     );
@@ -34,15 +34,18 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     padding: 15,
     width: '100%',
-    borderRadius: 8,
+    borderRadius: 4,
     backgroundColor: colors.grey,
     marginBottom: 6,
   },
   imageStyle: {
     // height: '100%',
-    // resizeMode: 'contain',
-    color: colors.dark,
+    width: 55, 
+    height: 55,
+    resizeMode: 'contain',
     marginRight: 20,
+    borderRadius: 40,
+    // color: colors.dark,
   },
   infosContainer: {
     flexDirection: 'row',

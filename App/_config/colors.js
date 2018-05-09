@@ -1,5 +1,6 @@
 export const blue = '#5190E3';
 export const orange = '#e8764d';
+export const orange_lighter = '#fff3ef';
 export const blue_text = '#8098B1';
 export const blue_white = '#a6bcda';
 export const white = '#fefefe';
@@ -8,5 +9,6 @@ export const grey = '#F1F5F7';
 export const grey_icon = '#b7b9bc';
 export const grey_lighter = '#f2f6f7';
 export const grey_dark = '#8BA1B8';
+export const grey_darker = '#e0e3e5';
 export const red = '#d54160';
 export const green = '#29c261';

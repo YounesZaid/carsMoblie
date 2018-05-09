@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { ScrollView } from 'react-native';
 
 import DriverItem from './DriverItem';
+import * as colors  from '_config/colors';
 
 export default class DriversScreen extends Component {
   state = {
@@ -9,7 +10,12 @@ export default class DriversScreen extends Component {
   }
   render() {
     return (
-      <ScrollView >
+      <ScrollView 
+        contentContainerStyle={{
+          backgroundColor: "#fefefe",
+          padding: 10,
+          // paddingTop: 10,
+        }}>
         {drivers.map((item, i) => {
           return <DriverItem key={i} driver={item} />
         })}
@@ -21,12 +27,12 @@ export default class DriversScreen extends Component {
 _GetItems = () => {
   return (
     drivers = [
-      { name: 'driver01', registrationNumber: 'driver-01', posted: '03/03/2018' },
-      { name: 'driver02', registrationNumber: 'driver-02', posted: '03/03/2018' },
-      { name: 'driver03', registrationNumber: 'driver-03', posted: '03/03/2018' },
-      { name: 'driver04', registrationNumber: 'driver-04', posted: '03/03/2018' },
-      { name: 'driver05', registrationNumber: 'driver-05', posted: '03/03/2018' },
-      { name: 'driver06', registrationNumber: 'driver-06', posted: '03/03/2018' },
+      { name: 'Younes Zaid', registrationNumber: 'registration-01', posted: '03/03/2018' },
+      { name: 'Ossama Zaid', registrationNumber: 'registration-02', posted: '03/03/2018' },
+      { name: 'Hmad Ben', registrationNumber: 'registration-03', posted: '03/03/2018' },
+      { name: 'Driver Xname', registrationNumber: 'registration-04', posted: '03/03/2018' },
+      { name: 'Souhail Xname', registrationNumber: 'registration-05', posted: '03/03/2018' },
+      { name: 'Soukaina Zaid', registrationNumber: 'registration-06', posted: '03/03/2018' },
     ]
   )
 }

@@ -20,14 +20,14 @@ Navigation.startTabBasedApp({
     {
       label: 'Trips',
       screen: 'TripsScreen', // this is a registered name for a screen
-      icon: require('Icons/icon.png'),
+      icon: require('_icons/icon.png'),
       /*selectedIcon: require('../img/one_selected.png'), // iOS only */
       title: 'Trips list',
     },
     {
       label: 'Drivers',
       screen: 'DriversScreen',
-      icon: require('Icons/icon.png'),
+      icon: require('_icons/icon.png'),
       /* selectedIcon: require('../img/two_selected.png'), // iOS only */
       title: 'Drivers list',
     }

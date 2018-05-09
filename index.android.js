@@ -27,14 +27,14 @@ import './App';
 //     {
 //       label: 'Trips',
 //       screen: 'test', // this is a registered name for a screen
-//       icon: require('Icons/icon.png'),
+//       icon: require('_icons/icon.png'),
 //       /*selectedIcon: require('../img/one_selected.png'), // iOS only */
 //       title: 'Screen One'
 //     },
 //     {
 //       label: 'Drivers',
 //       screen: 'test2',
-//       icon: require('Icons/icon.png'),
+//       icon: require('_icons/icon.png'),
 //       /* selectedIcon: require('../img/two_selected.png'), // iOS only */
 //       title: 'Screen Two'
 //     }
