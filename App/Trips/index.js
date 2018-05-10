@@ -7,13 +7,13 @@ import TripItem from './TripItem';
 export default class TripsScreen extends Component {
 
   state = {
-    trips: _GetItems()
+    trips: _GetTrips()
   }
   render() {
     const { trips } = this.state;
     return (
       <ScrollView contentContainerStyle={{
-        backgroundColor: colors.grey_darker,
+        backgroundColor: "#fefefe",
         padding: 10,
         // paddingTop: 10,
       }}>
@@ -30,20 +30,20 @@ export default class TripsScreen extends Component {
     renderItem={({ item }) => <TripItem {...item} />}
 /> */}
 
-_GetItems = () => {
+_GetTrips = () => {
   return (
     trips = [
-      { name: 'driver1', car: 'car-1', posted: '03/03/2018' },
-      { name: 'driver2', car: 'car-1', posted: '03/03/2018' },
-      { name: 'driver3', car: 'car-1', posted: '03/03/2018' },
-      { name: 'driver4', car: 'car-1', posted: '03/03/2018' },
-      { name: 'driver5', car: 'car-1', posted: '03/03/2018' },
-      { name: 'driver6', car: 'car-1', posted: '03/03/2018' },
-      { name: 'driver7', car: 'car-1', posted: '03/03/2018' },
-      { name: 'driver8', car: 'car-1', posted: '03/03/2018' },
-      { name: 'driver9', car: 'car-1', posted: '03/03/2018' },
-      { name: 'driver10', car: 'car-1', posted: '03/03/2018' },
-      { name: 'driver11', car: 'car-1', posted: '03/03/2018' }
+      { name: 'Younes Zaid', carName: 'car-1', posted: '03/03/2018' },
+      { name: 'driver2', carName: 'car-1', posted: '03/03/2018' },
+      { name: 'driver3', carName: 'car-1', posted: '03/03/2018' },
+      { name: 'driver4', carName: 'car-1', posted: '03/03/2018' },
+      { name: 'driver5', carName: 'car-1', posted: '03/03/2018' },
+      { name: 'driver6', carName: 'car-1', posted: '03/03/2018' },
+      { name: 'driver7', carName: 'car-1', posted: '03/03/2018' },
+      { name: 'driver8', carName: 'car-1', posted: '03/03/2018' },
+      { name: 'driver9', carName: 'car-1', posted: '03/03/2018' },
+      { name: 'driver10', carName: 'car-1', posted: '03/03/2018' },
+      { name: 'driver11', carName: 'car-1', posted: '03/03/2018' }
     ]
   )
 }
