@@ -20,15 +20,15 @@ Navigation.startTabBasedApp({
     {
       label: 'Trips',
       screen: 'TripsScreen', // this is a registered name for a screen
-      icon: require('_icons/icon.png'),
-      /*selectedIcon: require('../img/one_selected.png'), // iOS only */
+      icon: require('_images/tab-icons/pin.png'),
+      selectedIcon: require('_images/tab-icons/driver.png'), // iOS only
       title: 'Trips list',
     },
     {
       label: 'Drivers',
       screen: 'DriversScreen',
-      icon: require('_icons/icon.png'),
-      /* selectedIcon: require('../img/two_selected.png'), // iOS only */
+      icon: require('_images/tab-icons/driver.png'),
+      selectedIcon: require('_images/tab-icons/driver-s.png'), // iOS only
       title: 'Drivers list',
     }
   ],
