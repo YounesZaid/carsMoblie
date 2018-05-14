@@ -13,9 +13,9 @@ export default class TripsScreen extends Component {
     const { trips } = this.state;
     return (
       <ScrollView contentContainerStyle={{
-        backgroundColor: "#fefefe",
-        padding: 10,
-        // paddingTop: 10,
+        backgroundColor: "#efefef",
+        // padding: 10,
+        paddingTop: 10,
       }}>
         {trips.map((item, i) => {
           return <TripItem key={i} trip={item} />
