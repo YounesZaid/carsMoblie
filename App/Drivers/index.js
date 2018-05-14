@@ -12,8 +12,8 @@ export default class DriversScreen extends Component {
     return (
       <ScrollView 
         contentContainerStyle={{
-          backgroundColor: "#fefefe",
-          padding: 10,
+          backgroundColor: "#efefef",
+          padding: 7,
           // paddingTop: 10,
         }}>
         {drivers.map((item, i) => {

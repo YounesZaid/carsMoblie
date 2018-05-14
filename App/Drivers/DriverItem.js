@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native';
+import ElevatedView from "fiber-react-native-elevated-view";
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import * as colors from '_config/colors';
@@ -8,58 +9,70 @@ class DriverItem extends Component {
   render() {
     const { driver } = this.props;
     return (
-      <TouchableOpacity
-        activeOpacity={.6}
-        onPress={e => alert(`${driver.name}`)}>
-        <View style={styles.container}>
-          <View style={styles.infosContainer}>
-            <Image style={styles.imageStyle} source={require('_images/img.jpg')}/>
-            {/* <Icon name="ios-contact" size={55} style={styles.imageStyle} /> */}
-            <View>
-              <Text style={styles.nameStyle}>{driver.name}</Text>
-              <Text style={styles.registrationStyle}>{driver.registrationNumber}</Text>
-            </View>
-          </View>
-          <Icon name="ios-arrow-forward-outline" size={40} color="#dbdbdb"/>
+      <ElevatedView
+        style={styles.container}
+        elevation={4}
+        elevationColor={colors.dark}
+        activeElevation={2}>
+        <View style={{
+          backgroundColor: colors.orange,
+          borderRadius: 2,
+          height: 50,
+        }} />
+        <Image source={require('_images/img.jpg')} style={styles.imageStyle}/>
+        <View style={styles.infoContainer}>
+          <Text style={{
+            fontSize: 18,
+            fontWeight: '600',
+            color: colors.dark
+          }}>{driver.name}</Text>
+          <Text style={{
+            fontSize: 16,
+            fontWeight: '300',
+            color: '#9C9B9B'
+          }}>{driver.registrationNumber}</Text>
         </View>
-      </TouchableOpacity>
+        <TouchableOpacity
+            activeOpacity={.6}
+            onPress={e => alert(`${driver.name}`)} >
+            <Text style={styles.detailsStyle}> Show details ... </Text>
+        </TouchableOpacity>
+
+      </ElevatedView>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: 15,
-    width: '100%',
-    borderRadius: 4,
-    backgroundColor: colors.grey,
-    marginBottom: 6,
+    borderRadius: 2,
+    backgroundColor: colors.white,
+    marginBottom: 10,
+    flexDirection: 'column',
   },
   imageStyle: {
-    // height: '100%',
-    width: 55, 
-    height: 55,
-    resizeMode: 'contain',
-    marginRight: 20,
-    borderRadius: 40,
-    // color: colors.dark,
+    width: 60,
+    height: 60,
+    alignSelf: 'center',
+    position: 'absolute',
+    top: 15,
+    borderRadius: 40,   
   },
-  infosContainer: {
-    flexDirection: 'row',
-    margin: 0,
+  infoContainer: {
+    marginTop: 20,
+    alignItems: 'center',
+    padding: 12,
   },
-  nameStyle: {
-    fontSize: 18,
-    fontWeight: '500',
-    color: colors.blue_text
-  },
-  registrationStyle: {
-    fontSize: 16,
-    fontWeight: '100',
-    color: "#b1b9c6"
+  detailsStyle: {
+    fontSize: 15,
+    fontWeight: '400',
+    padding: 10,
+    alignSelf: 'center',
+    borderTopWidth: 1,
+    width: 300,
+    textAlign: 'center',
+    borderColor: '#efefef',
+    color: colors.dark,
   }
 
 })
