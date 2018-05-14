@@ -18,7 +18,7 @@ export default class TripsScreen extends Component {
         // paddingTop: 10,
       }}>
         {trips.map((item, i) => {
-          return <TripItem key={i} trip={item} />
+          return <TripItem key={i} trip={item} navigator={this.props.navigator}/>
         })}
       </ScrollView>
     );

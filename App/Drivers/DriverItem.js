@@ -6,6 +6,17 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import * as colors from '_config/colors';
 
 class DriverItem extends Component {
+  state = {
+    driver: 'ali'
+  }
+  name = this.state.driver
+  handleShowDetailsPage = () => {
+    this.props.navigator.push({
+      screen: 'DriverDetails',
+      title: 'Driver Details',
+      passProps: {name}
+    });
+  }
   render() {
     const { driver } = this.props;
     return (
@@ -34,7 +45,7 @@ class DriverItem extends Component {
         </View>
         <TouchableOpacity
             activeOpacity={.6}
-            onPress={e => alert(`${driver.name}`)} >
+            onPress={() => this.handleShowDetailsPage()} >
             <Text style={styles.detailsStyle}> Show details ... </Text>
         </TouchableOpacity>
 

@@ -9,10 +9,11 @@ class TripItem extends Component {
 
   handlePushPage = () => {
     this.props.navigator.push({
-      screen: 'MapScreen',
+      screen: 'TripDetails',
       title: 'Trip Details'
     });
   }
+
   render() {
     const { trip } = this.props;
     return (
@@ -42,7 +43,7 @@ class TripItem extends Component {
             <Text style={styles.availabilityStyle}>Active</Text>
             <TouchableOpacity
               activeOpacity={.6}
-              onPress={e => alert(`${trip.name}`)} >
+              onPress={e => this.handlePushPage()} >
               <View style={{
                 flexDirection: 'row',
               }}>

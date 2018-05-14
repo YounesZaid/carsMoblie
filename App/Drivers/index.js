@@ -17,7 +17,7 @@ export default class DriversScreen extends Component {
           // paddingTop: 10,
         }}>
         {drivers.map((item, i) => {
-          return <DriverItem key={i} driver={item} />
+          return <DriverItem key={i} driver={item} navigator={this.props.navigator}/>
         })}
       </ScrollView>
     );
