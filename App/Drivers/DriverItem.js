@@ -6,15 +6,12 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import * as colors from '_config/colors';
 
 class DriverItem extends Component {
-  state = {
-    driver: 'ali'
-  }
-  name = this.state.driver
+  
   handleShowDetailsPage = () => {
     this.props.navigator.push({
       screen: 'DriverDetails',
       title: 'Driver Details',
-      passProps: {name}
+      passProps: {name: this.props.driver.name}
     });
   }
   render() {
