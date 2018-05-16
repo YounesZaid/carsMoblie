@@ -1,6 +1,6 @@
 package com.carsmobile;
 
-
+import com.airbnb.android.react.maps.MapsPackage;
 import com.facebook.react.ReactPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.reactnativenavigation.NavigationApplication;
@@ -22,7 +22,8 @@ public class MainApplication extends NavigationApplication {
     // No need to add RnnPackage and MainReactPackage
     return Arrays.<ReactPackage>asList(
             // eg. new VectorIconsPackage()
-            new VectorIconsPackage()
+            new VectorIconsPackage(),
+            new MapsPackage()
     );
   }
 

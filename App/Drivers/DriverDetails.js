@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
+import MapView from 'react-native-maps';
 
 import * as colors from '_config/colors';
 
@@ -50,16 +51,26 @@ class DriverDetails extends Component {
             <Text style={styles.TextDescriptionStyle}>70%</Text>
           </View>
         </View>
-        <View style={{ marginTop: 10 }}>
+        <View style={styles.driverLocalizationStyle}>
           <Text style={styles.aboutStyle}>Driver localization</Text>
-          <View style={{
-            backgroundColor: '#efefef',
-            width: 320,
-            height: 200,
-            marginRight: 20,
-            marginLeft: 20,
-            marginBottom: 20
-          }} />
+          <View style={styles.mapContainer} >
+            <MapView style={styles.map}
+              initialRegion={{
+                latitude: 34.0132500,
+                longitude: -6.8325500,
+                latitudeDelta: 1,
+                longitudeDelta: 1,
+              }}>
+              <MapView.Marker
+                coordinate={{
+                  latitude: 34.0132500,
+                  longitude: -6.8325500,
+                }}
+                title={'marker title'}
+                description={'marker description'}
+              />
+            </MapView>
+          </View>
         </View>
       </ScrollView>
     );
@@ -107,7 +118,34 @@ const styles = StyleSheet.create({
   TextDescriptionStyle: {
     fontSize: 15,
     color: '#9C9B9B',
-  }
+  },
+  driverLocalizationStyle: {
+    marginTop: 10,
+    width: '100%',
+    height: 300
+  },
+  mapContainer: {
+    backgroundColor: '#efefef',
+    width: 320,
+    height: 250,
+    marginRight: 20,
+    marginLeft: 20,
+    marginBottom: 20,
+    position: 'absolute',
+    top: 40,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+  },
+  map: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
 })
 
 export default DriverDetails;
