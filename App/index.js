@@ -10,7 +10,7 @@ const tabsStyle = {
   tabBarButtonColor: colors.grey_icon, // optional, change the color of the tab icons and text (also unselected)
   tabBarSelectedButtonColor: colors.orange, // optional, change the color of the selected tab icon and text (only selected)
   tabBarBackgroundColor: colors.white, // optional, change the background color of the tab bar
-  initialTabIndex: 0, // optional, the default selected bottom tab. Default: 0
+  initialTabIndex: 2, // optional, the default selected bottom tab. Default: 0
   forceTitlesDisplay: true,
 };
 
@@ -32,8 +32,8 @@ Navigation.startTabBasedApp({
       title: 'Drivers list',
     },
     {
-      label: 'Remote',
-      screen: 'RemoteScreen',
+      label: 'ErrorPage',
+      screen: 'ErrorPage',
       icon: require('_images/tab-icons/remote.png'),
       selectedIcon: require('_images/tab-icons/remote-s.png'), // iOS only
       title: 'Car remote',
