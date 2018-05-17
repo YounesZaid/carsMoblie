@@ -6,6 +6,7 @@ import TripDetails from './Trips/TripDetails';
 import DriversScreen from './Drivers/';
 import DriverDetails from './Drivers/DriverDetails';
 import ErrorPage from './_defaults/ErrorPage';
+import CarsScreen from './Cars';
 
 // register all screens of the app (including internal ones)
 export function registerScreens() {
@@ -14,5 +15,6 @@ export function registerScreens() {
   Navigation.registerComponent('DriversScreen', () => DriversScreen);
   Navigation.registerComponent('DriverDetails', () => DriverDetails);
   Navigation.registerComponent('RemoteScreen', () => RemoteScreen);
+  Navigation.registerComponent('CarsScreen', () => CarsScreen);
   Navigation.registerComponent('ErrorPage', () => ErrorPage);
 }
