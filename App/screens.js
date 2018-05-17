@@ -1,5 +1,6 @@
 import { Navigation } from 'react-native-navigation';
 
+import RemoteScreen from './Remote/';
 import TripsScreen from './Trips/';
 import TripDetails from './Trips/TripDetails';
 import DriversScreen from './Drivers/';
@@ -11,4 +12,5 @@ export function registerScreens() {
   Navigation.registerComponent('TripDetails', () => TripDetails);
   Navigation.registerComponent('DriversScreen', () => DriversScreen);
   Navigation.registerComponent('DriverDetails', () => DriverDetails);
+  Navigation.registerComponent('RemoteScreen', () => RemoteScreen);
 }
