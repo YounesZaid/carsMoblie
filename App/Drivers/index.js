@@ -1,28 +1,64 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import {
+  ScrollView,
+  View,
+  Image,
+  StyleSheet,
+  ActivityIndicator,
+} from 'react-native';
 
 import DriverItem from './DriverItem';
-import * as colors  from '_config/colors';
+import * as colors from '_config/colors';
 
 export default class DriversScreen extends Component {
+
   state = {
-    drivers: _GetItems()
+    drivers: [],
+    isLoading: true
   }
+
+  componentDidMount() {
+    this.setState({
+      drivers: _GetItems(),
+      isLoading: false
+    })
+  }
+
   render() {
-    return (
-      <ScrollView 
+    const { drivers, isLoading } = this.state;
+
+    if (isLoading || drivers.length === 0) {
+      return [
+        <View key={0} style={styles.emptyContainer}>
+          {isLoading && <ActivityIndicator size="large" color={colors.orange} />}
+          {!isLoading && <Image source={require('_images/icons/empty/empty.png')} style={styles.emptyImage}/>}
+        </View>
+      ]
+    }
+    return [
+      <ScrollView key={1}
         contentContainerStyle={{
           backgroundColor: "#efefef",
           padding: 7,
           // paddingTop: 10,
         }}>
         {drivers.map((item, i) => {
-          return <DriverItem key={i} driver={item} navigator={this.props.navigator}/>
+          return <DriverItem key={i} driver={item} navigator={this.props.navigator} />
         })}
       </ScrollView>
-    );
+    ]
   }
 }
+
+const styles = StyleSheet.create({
+  emptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  emptyImage: {
+    alignSelf: 'center',
+  }
+})
 
 _GetItems = () => {
   return (
