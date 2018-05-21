@@ -10,7 +10,10 @@ class TripItem extends Component {
   handlePushPage = () => {
     this.props.navigator.push({
       screen: 'TripDetails',
-      title: 'Trip Details'
+      title: 'Trip Details',
+      navigatorStyle: {
+        tabBarHidden: true,
+      }
     });
   }
 

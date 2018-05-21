@@ -11,7 +11,10 @@ class DriverItem extends Component {
     this.props.navigator.push({
       screen: 'DriverDetails',
       title: 'Driver Details',
-      passProps: {name: this.props.driver.name}
+      passProps: {name: this.props.driver.name},
+      navigatorStyle: {
+        tabBarHidden: true,
+      }
     });
   }
   render() {

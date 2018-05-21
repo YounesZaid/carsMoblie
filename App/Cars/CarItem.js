@@ -16,7 +16,10 @@ class CarItem extends Component {
   handlePushPage = () => {
     this.props.navigator.push({
       screen: 'CarDetails',
-      title: 'Car details'
+      title: 'Car details',
+      navigatorStyle: {
+        tabBarHidden: true,
+      }
     })
   }
 
