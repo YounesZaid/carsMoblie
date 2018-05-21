@@ -14,7 +14,7 @@ class ErrorPage extends Component {
         <Text style={{
           fontSize: 30,
           fontWeight: '700',
-          color: "#fff"
+          color: "#F1A68C"
         }}>Uh Oh !</Text>
         <View style={{
           flexDirection: 'row',
@@ -23,12 +23,11 @@ class ErrorPage extends Component {
           <Text style={{
             fontSize: 20,
             fontWeight: '300',
-            color: "#fff",
+            color: "#F1A68C",
             marginRight: 10
           }}>
-            Something went wrong
+            Something went wrong .
           </Text>
-          <Icon name='ios-sad-outline' size={22} color="#fff" />
         </View>
         <Image source={require('_images/icons/error/broken.png')} style={{
           width: 190,
@@ -46,7 +45,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: "rgba(217,43,43, 0.9)"
   }
 })
 export default ErrorPage;

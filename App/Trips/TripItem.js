@@ -42,7 +42,6 @@ class TripItem extends Component {
           <View style={styles.infosBottom}>
             <Text style={styles.availabilityStyle}>Active</Text>
             <TouchableOpacity
-              activeOpacity={.6}
               onPress={e => this.handlePushPage()} >
               <View style={{
                 flexDirection: 'row',

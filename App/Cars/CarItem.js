@@ -21,6 +21,8 @@ class CarItem extends Component {
   }
 
   render() {
+    const { car } = this.props;
+
     return (
       <ElevatedView
         style={{
@@ -36,17 +38,16 @@ class CarItem extends Component {
           <View style={{
             marginRight: 40
           }}>
-            <Text style={styles.textDescription}>Model-s</Text>
+            <Text style={styles.textDescription}>{car.model}</Text>
             <Text style={styles.textTitle}>Model</Text>
           </View>
           <View style={{
             flex: 1
           }}>
-            <Text style={styles.textDescription}>Tesla</Text>
+            <Text style={styles.textDescription}>{car.name}</Text>
             <Text style={styles.textTitle}>Name</Text>
           </View>
           <TouchableOpacity
-            activeOpacity={.6}
             onPress={() => this.handlePushPage()}
             style={{
               flexDirection: 'row',

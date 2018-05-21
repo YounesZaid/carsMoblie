@@ -41,7 +41,6 @@ class DriverItem extends Component {
           }}>{driver.registrationNumber}</Text>
         </View>
         <TouchableOpacity
-            activeOpacity={.6}
             onPress={() => this.handleShowDetailsPage()} >
             <Text style={styles.detailsStyle}> Show details ... </Text>
         </TouchableOpacity>
