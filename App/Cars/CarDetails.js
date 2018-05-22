@@ -5,20 +5,61 @@ import {
   Image,
   StyleSheet,
   TouchableOpacity,
-  ScrollView
+  ScrollView,
+  ActivityIndicator
 } from 'react-native';
 
+import firestore from '_config/database';
 import * as colors from '_config/colors';
 
 class CarDetails extends Component {
 
   state = {
-    selectedTab: 'informations'
+    selectedTab: 'informations',
+    car: {},
+    isLoading: true
+  }
+
+  handleErrorPage = () => {
+    this.props.navigator.push({
+      screen: 'ErrorPage',
+      navigatorStyle: {
+        tabBarHidden: true,
+      }
+    });
+  }
+
+  componentDidMount() {
+    firestore.collection("cars").doc(this.props.id).onSnapshot((doc) => {
+      if (doc.exists) {
+        const data = doc.data();
+        this.setState({
+          car: {
+            carName: data.carName,
+            carMatricule: data.carMatricule,
+            carType: data.carType,
+            carPlaces: data.carPlaces,
+            postedCarAt: data.postedCarAt,
+            carId: doc.id
+          },
+          isLoading: false
+        })
+      } else {
+        this.handleErrorPage();
+      }
+    });
   }
 
   render() {
-    return (
-      <View style={styles.container}>
+    const { car, isLoading, selectedTab } = this.state;
+
+    if (isLoading) {
+      return [
+        <ActivityIndicator key={0} size='large' color={colors.orange} />
+      ]
+    }
+    return [
+      <View key={1} style={styles.container}>
         <Image source={require('_images/tesla.jpeg')} style={styles.imageStyle} />
         <Text style={{
           fontSize: 15,
@@ -36,29 +77,29 @@ class CarDetails extends Component {
           <TouchableOpacity style={[
             styles.selectedBtn,
             { marginRight: 40, },
-            this.state.selectedTab === 'informations' && { borderBottomColor: colors.orange, }
+            selectedTab === 'informations' && { borderBottomColor: colors.orange, }
           ]}
             onPress={e => this.setState({ selectedTab: 'informations', })}>
             <Text style={[
               styles.buttonText,
-              this.state.selectedTab === 'informations' && { color: colors.orange, }
+              selectedTab === 'informations' && { color: colors.orange, }
             ]}>Informations</Text>
           </TouchableOpacity>
 
           <TouchableOpacity style={[
             styles.selectedBtn,
-            this.state.selectedTab === 'statistics' && { borderBottomColor: colors.orange, }
+            selectedTab === 'statistics' && { borderBottomColor: colors.orange, }
           ]} onPress={e => this.setState({ selectedTab: 'statistics', })}>
             <Text style={[
               styles.buttonText,
-              this.state.selectedTab === 'statistics' && { color: colors.orange, }
+              selectedTab === 'statistics' && { color: colors.orange, }
             ]}>Statistics</Text>
           </TouchableOpacity>
         </View>
-        {this.state.selectedTab === 'informations' && <Informations />}
-        {this.state.selectedTab === 'statistics' && <Statistics />}
+        {selectedTab === 'informations' && <Informations car={car} />}
+        {selectedTab === 'statistics' && <Statistics />}
       </View>
-    );
+    ]
   }
 }
 
@@ -92,7 +133,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '400',
     color: colors.dark,
-    width: 200,
+    width: 160,
     marginLeft: 30
   },
   infoDescription: {
@@ -102,11 +143,11 @@ const styles = StyleSheet.create({
   }
 })
 
-const Informations = () => (
+const Informations = ({ car }) => (
   <View style={{
     justifyContent: 'space-evenly',
     flex: 1,
-    padding: 10,
+    padding: 5,
     marginTop: 15,
     marginRight: 8,
     marginLeft: 8,
@@ -115,15 +156,19 @@ const Informations = () => (
   }}>
     <View style={styles.infoContainer}>
       <Text style={styles.infoTitle}>Number of places</Text>
-      <Text style={styles.infoDescription}>4</Text>
+      <Text style={styles.infoDescription}>{car.carPlaces}</Text>
     </View>
     <View style={styles.infoContainer}>
       <Text style={styles.infoTitle}>Registration</Text>
-      <Text style={styles.infoDescription}>38-A-755</Text>
+      <Text style={styles.infoDescription}>{car.carMatricule}</Text>
     </View>
     <View style={styles.infoContainer}>
       <Text style={styles.infoTitle}>Type</Text>
-      <Text style={styles.infoDescription}>Diesel</Text>
+      <Text style={styles.infoDescription}>{car.carType}</Text>
+    </View>
+    <View style={styles.infoContainer}>
+      <Text style={styles.infoTitle}>Posted</Text>
+      <Text style={styles.infoDescription}>{car.postedCarAt}</Text>
     </View>
   </View>
 )

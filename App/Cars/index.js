@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 
 
+import firestore from '_config/database';
 import * as colors from '_config/colors';
 import CarItem from './CarItem';
 
@@ -18,11 +19,35 @@ class CarsScreen extends Component {
     isLoading: true
   }
 
+  handleErrorPage = () => {
+    this.props.navigator.push({
+      screen: 'ErrorPage',
+      navigatorStyle: {
+        tabBarHidden: true,
+      }
+    });
+  }
+
   componentDidMount() {
-    this.setState({
-      cars: _GetCars(),
-      isLoading: false
-    })
+    firestore.collection("cars").orderBy('postedCarAt', 'desc').onSnapshot((QuerySnapshot) => {
+      const carItems = [];
+      QuerySnapshot.forEach((doc) => {
+        const data = doc.data();
+        let docItem = {
+          carName: data.carName,
+          carMatricule: data.carMatricule,
+          carType: data.carType,
+          carPlaces: data.carPlaces,
+          postedCarAt: data.postedCarAt,
+          carId: doc.id
+        }
+        carItems.push(docItem);
+      });
+      this.setState({
+        cars: carItems,
+        isLoading: false
+      })
+    });
   }
 
   render() {
@@ -33,10 +58,10 @@ class CarsScreen extends Component {
           flex: 1,
           justifyContent: 'center',
         }}>
-          {isLoading && <ActivityIndicator size='large' color={colors.orange}/>}
+          {isLoading && <ActivityIndicator size='large' color={colors.orange} />}
           {!isLoading && <Image source={require('_images/icons/empty/empty.png')} style={{
             alignSelf: 'center'
-          }}/>}
+          }} />}
         </View>
       ]
     }
