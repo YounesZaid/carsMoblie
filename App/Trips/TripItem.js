@@ -11,6 +11,7 @@ class TripItem extends Component {
     this.props.navigator.push({
       screen: 'TripDetails',
       title: 'Trip Details',
+      passProps: {id: this.props.trip.id},
       navigatorStyle: {
         tabBarHidden: true,
       }
@@ -32,7 +33,12 @@ class TripItem extends Component {
         <View style={styles.container}>
           <View style={styles.infosContainer}>
             <Icon name='ios-contact-outline' size={25} color={colors.orange} />
-            <Text style={styles.textStyle}>{trip.name}</Text>
+            <Text style={styles.textStyle}>{trip.driverFirstName}</Text>
+            <Text style={{
+              fontSize: 18,
+              fontWeight: '500',
+              marginLeft: 5
+            }}>{trip.driverLastName}</Text>
           </View>
           <View style={styles.infosContainer}>
             <Icon name='ios-car-outline' size={25} />
@@ -40,7 +46,7 @@ class TripItem extends Component {
           </View>
           <View style={styles.infosContainer}>
             <Icon name='ios-calendar-outline' size={25} />
-            <Text style={styles.textStyle}>{trip.posted}</Text>
+            <Text style={styles.textStyle}>{trip.postedTripAt}</Text>
           </View>
           <View style={styles.infosBottom}>
             <Text style={styles.availabilityStyle}>Active</Text>

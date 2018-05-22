@@ -5,13 +5,13 @@ import * as colors from '_config/colors';
 
 registerScreens(); // this is where you register all of your app's screens
 
-renderSplashScreen();
+// renderSplashScreen();
 
-setTimeout(() => {
-  renderApplication()
-}, 2000)
+// setTimeout(() => {
+//   renderApplication()
+// }, 2000)
 
-renderApplication = () => {
+// renderApplication = () => {
 
   const tabsStyle = {
     tabBarButtonColor: colors.grey_icon, // optional, change the color of the tab icons and text (also unselected)
@@ -19,6 +19,9 @@ renderApplication = () => {
     tabBarBackgroundColor: colors.white, // optional, change the background color of the tab bar
     initialTabIndex: 0, // optional, the default selected bottom tab. Default: 0
     forceTitlesDisplay: true,
+    // tabBarCollapseOnScroll: true,
+    // navBarHideOnScroll: true,
+    statusBarHideWithNavBar: true,
   };
 
   // start the app
@@ -56,7 +59,7 @@ renderApplication = () => {
     appStyle: tabsStyle,
     animationType: 'none'
   });
-}
+//}
 
 function renderSplashScreen() {
   Navigation.startSingleScreenApp({

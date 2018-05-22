@@ -9,7 +9,9 @@ import {
   ActivityIndicator,
 } from 'react-native';
 
-import * as colors from '_config/colors'
+// import * as firebase from 'firebase';
+import firestore from '_config/database';
+import * as colors from '_config/colors';
 import TripItem from './TripItem';
 
 export default class TripsScreen extends Component {
@@ -20,10 +22,59 @@ export default class TripsScreen extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      trips: _GetTrips(),
-      isLoading: false
-    })
+    firestore.collection("trips").orderBy('postedTripAt', 'desc').onSnapshot((querySnapshot) => {
+      const tripItems = [];
+      const driverAndCarPromises = [[], []]
+      querySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const driverPromise = firestore.collection("drivers").doc(data.driverId).get();
+        const carPromise = firestore.collection("cars").doc(data.carId).get();
+        driverAndCarPromises[0].push(driverPromise);
+        driverAndCarPromises[1].push(carPromise);
+        tripItems.push({
+          driverId: data.driverId,
+          carId: data.carId,
+          id: doc.id,
+          isActive: data.isActive,
+          postedTripAt: data.postedTripAt
+        });
+      });
+      const promise4All = Promise.all(driverAndCarPromises.map(Promise.all, Promise));
+      promise4All
+        .then(driversAndCars => {
+          const driverDocs = driversAndCars[0];
+          const carDocs = driversAndCars[1];
+          driverDocs.forEach(driverDoc => {
+            tripItems.forEach((tripObj, i) => {
+              if (tripObj.driverId === driverDoc.id) {
+                tripItems[i] = {
+                  ...tripObj,
+                  ...(driverDoc.data())
+                }
+              }
+            })
+          });
+          carDocs.forEach(carDoc => {
+            tripItems.forEach((tripObj, i) => {
+              if (tripObj.carId === carDoc.id) {
+                tripItems[i] = {
+                  ...tripObj,
+                  ...(carDoc.data())
+                }
+              }
+            })
+          });
+          this.setState({
+            trips: tripItems,
+            isLoading: false,
+          })
+        })
+        .catch(error => {
+          // WHEN SOMETHING WENT WRONG!
+          this.showErrorToast(error);
+        })
+
+    });
   }
 
   render() {
