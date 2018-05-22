@@ -21,6 +21,15 @@ export default class TripsScreen extends Component {
     isLoading: true,
   }
 
+  handleErrorPage = () => {
+    this.props.navigator.push({
+      screen: 'ErrorPage',
+      navigatorStyle: {
+        tabBarHidden: true,
+      }
+    });
+  }
+
   componentDidMount() {
     firestore.collection("trips").orderBy('postedTripAt', 'desc').onSnapshot((querySnapshot) => {
       const tripItems = [];
@@ -71,7 +80,7 @@ export default class TripsScreen extends Component {
         })
         .catch(error => {
           // WHEN SOMETHING WENT WRONG!
-          this.showErrorToast(error);
+          this.handleErrorPage();
         })
 
     });

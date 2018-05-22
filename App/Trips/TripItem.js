@@ -49,7 +49,7 @@ class TripItem extends Component {
             <Text style={styles.textStyle}>{trip.postedTripAt}</Text>
           </View>
           <View style={styles.infosBottom}>
-            <Text style={styles.availabilityStyle}>Active</Text>
+          {trip.isActive && <Text style={styles.availabilityStyle}>Active</Text>}
             <TouchableOpacity
               onPress={e => this.handlePushPage()} >
               <View style={{
