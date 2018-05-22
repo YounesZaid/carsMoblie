@@ -11,7 +11,7 @@ class DriverItem extends Component {
     this.props.navigator.push({
       screen: 'DriverDetails',
       title: 'Driver Details',
-      passProps: {name: this.props.driver.name},
+      passProps: {id: this.props.driver.driverId},
       navigatorStyle: {
         tabBarHidden: true,
       }
@@ -32,16 +32,26 @@ class DriverItem extends Component {
         }} />
         <Image source={require('_images/img.jpg')} style={styles.imageStyle}/>
         <View style={styles.infoContainer}>
-          <Text style={{
-            fontSize: 18,
-            fontWeight: '600',
-            color: colors.dark
-          }}>{driver.name}</Text>
+          <View style={{
+            flexDirection: 'row'
+          }}>
+            <Text style={{
+              fontSize: 18,
+              fontWeight: '600',
+              color: colors.dark,
+              marginRight: 5
+            }}>{driver.driverFirstName}</Text>
+            <Text style={{
+              fontSize: 18,
+              fontWeight: '600',
+              color: colors.dark
+            }}>{driver.driverLastName}</Text>
+          </View>
           <Text style={{
             fontSize: 16,
             fontWeight: '300',
             color: '#9C9B9B'
-          }}>{driver.registrationNumber}</Text>
+          }}>{driver.driverRegistrationNumber}</Text>
         </View>
         <TouchableOpacity
             onPress={() => this.handleShowDetailsPage()} >

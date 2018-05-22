@@ -7,6 +7,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 
+import firestore from '_config/database';
 import DriverItem from './DriverItem';
 import * as colors from '_config/colors';
 
@@ -18,10 +19,46 @@ export default class DriversScreen extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      drivers: _GetItems(),
-      isLoading: false
-    })
+    firestore.collection("drivers").orderBy('postedDriverAt', 'desc').onSnapshot((QuerySnapshot) => {
+      const driverItems = [];
+      const cardIdsDocPromises = [];
+      QuerySnapshot.forEach((doc) => {
+        const data = doc.data();
+        const promise = firestore.collection("cards").doc(data.cardId).get();
+        cardIdsDocPromises.push(promise);
+        driverItems.push({
+          driverFirstName: data.driverFirstName,
+          driverLastName: data.driverLastName,
+          driverRegistrationNumber: data.driverRegistrationNumber,
+          driverPhoneNumber: data.driverPhoneNumber,
+          driverHireDate: data.driverHireDate,
+          postedDriverAt: data.postedDriverAt,
+          cardId: data.cardId,
+          driverId: doc.id
+        });
+      });
+
+      Promise.all(cardIdsDocPromises).then(cardDocs => {
+        cardDocs.forEach(cardDoc => {
+          driverItems.forEach((driverObject, i) => {
+            if (driverObject.cardId === cardDoc.id) {
+              driverItems[i] = {
+                ...driverObject,
+                ...(cardDoc.data())
+              }
+            }
+          })
+        });
+        this.setState({
+          drivers: driverItems,
+          isLoading: false
+        })
+      })
+        .catch(error => {
+          this.showErrorLoadingToast();
+        })
+
+    });
   }
 
   render() {
@@ -31,7 +68,7 @@ export default class DriversScreen extends Component {
       return [
         <View key={0} style={styles.emptyContainer}>
           {isLoading && <ActivityIndicator size="large" color={colors.orange} />}
-          {!isLoading && <Image source={require('_images/icons/empty/empty.png')} style={styles.emptyImage}/>}
+          {!isLoading && <Image source={require('_images/icons/empty/empty.png')} style={styles.emptyImage} />}
         </View>
       ]
     }

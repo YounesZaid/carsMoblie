@@ -1,50 +1,123 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  ScrollView,
+  ActivityIndicator
+} from 'react-native';
 import MapView from 'react-native-maps';
 
+import firestore from '_config/database';
 import * as colors from '_config/colors';
 
 class DriverDetails extends Component {
+  state = {
+    driver: null,
+    isLoading: true
+  }
+
+  handleErrorPage = () => {
+    this.props.navigator.push({
+      screen: 'ErrorPage',
+      navigatorStyle: {
+        tabBarHidden: true,
+      }
+    });
+  }
+
+  componentDidMount() {
+    firestore.collection("drivers").doc(this.props.id).onSnapshot((doc) => {
+      if (doc.exists) {
+        const data = doc.data();
+        const cardIdsDocPromises = [];
+        const promise = firestore.collection("cards").doc(data.cardId).get();
+        cardIdsDocPromises.push(promise);
+        Promise.all(cardIdsDocPromises).then(cardDocs => {
+          cardDocs.forEach(cardDoc => {
+            if (data.cardId === cardDoc.id) {
+              this.setState({
+                driver: {
+                  ...data,
+                  ...(cardDoc.data())
+                },
+                isLoading: false
+              })
+            }
+          });
+        })
+          .catch(error => {
+            this.handleErrorPage();
+          })
+      } else {
+        // 1
+        // this.setState({ trip: null, isLoading: false })
+        // 2
+        this.handleErrorPage();
+      }
+    });
+  }
   render() {
-    const { name } = this.props;
-    return (
-      <ScrollView contentContainerStyle={{
-        flexDirection: 'column',
-      }}>
+    const { driver, isLoading } = this.state;
+
+    if (isLoading) {
+      return [
+        <ActivityIndicator key={0} size='large' color={colors.orange} />
+      ]
+    }
+    return [
+      <ScrollView key={1}
+        contentContainerStyle={{
+          flexDirection: 'column',
+        }}>
         <View style={styles.driverDetailsHeader}>
           <Image source={require('_images/img.jpg')} style={styles.imageStyle} />
           <View>
-            <Text style={{
-              fontSize: 18,
-              fontWeight: '500',
-              textAlign: 'center',
-              color: colors.dark,
+            <View style={{
+              flexDirection: 'row',
+              justifyContent: 'center',
               marginBottom: 5
-            }}>Younes Zaid</Text>
+              
+            }}>
+              <Text style={{
+                fontSize: 18,
+                fontWeight: '500',
+                textAlign: 'center',
+                color: colors.dark,
+                marginRight: 3
+              }}>{driver.driverFirstName}</Text>
+              <Text style={{
+                fontSize: 18,
+                fontWeight: '500',
+                textAlign: 'center',
+                color: colors.dark,
+              }}>{driver.driverLastName}</Text>
+            </View>
             <Text style={{
               fontSize: 16,
               fontWeight: '200',
               textAlign: 'center',
               color: '#9C9B9B'
-            }}>+212672849591</Text>
+            }}>{driver.driverPhoneNumber}</Text>
           </View>
         </View>
         <View>
           <Text style={styles.aboutStyle}>About Driver</Text>
           <View style={styles.aboutContentStyle}>
             <Text style={styles.TitleTextextStyle}>Hire date</Text>
-            <Text style={styles.TextDescriptionStyle}>12/07/2012</Text>
+            <Text style={styles.TextDescriptionStyle}>{driver.driverHireDate}</Text>
           </View>
           <View style={styles.aboutContentStyle}>
             <Text style={styles.TitleTextextStyle}>Registration</Text>
-            <Text style={styles.TextDescriptionStyle}>Driver-01</Text>
+            <Text style={styles.TextDescriptionStyle}>{driver.driverRegistrationNumber}</Text>
           </View>
         </View>
         <View style={{ marginTop: 10 }}>
           <Text style={styles.aboutStyle}>Card Driver</Text>
           <View style={styles.aboutContentStyle}>
             <Text style={styles.TitleTextextStyle}>Card number</Text>
-            <Text style={styles.TextDescriptionStyle}>card-01</Text>
+            <Text style={styles.TextDescriptionStyle}>{driver.cardIdentifier}</Text>
           </View>
           <View style={styles.aboutContentStyle}>
             <Text style={styles.TitleTextextStyle}>Consumption</Text>
@@ -73,7 +146,7 @@ class DriverDetails extends Component {
           </View>
         </View>
       </ScrollView>
-    );
+    ]
   }
 }
 
