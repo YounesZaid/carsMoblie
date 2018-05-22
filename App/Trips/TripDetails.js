@@ -99,8 +99,8 @@ class TripDetails extends Component {
           initialRegion={{
             latitude: 34.0132500,
             longitude: -6.8325500,
-            latitudeDelta: 0.015,
-            longitudeDelta: 0.0121,
+            latitudeDelta: 0.1,
+            longitudeDelta: 0.1,
           }}>
           {trip.locations.map((location, i) => (
             <MapView.Marker
