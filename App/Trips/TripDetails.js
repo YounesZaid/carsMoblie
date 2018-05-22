@@ -93,16 +93,16 @@ class TripDetails extends Component {
 
     return [
       <View key={1} style={styles.container}>
-        <Text> Map here </Text>
-        <Text>yes</Text>
         <MapView style={styles.map}
+          mapType='standard'
+          zoomEnabled={true}
           initialRegion={{
             latitude: 34.0132500,
             longitude: -6.8325500,
-            latitudeDelta: 1,
-            longitudeDelta: 1,
+            latitudeDelta: 0.015,
+            longitudeDelta: 0.0121,
           }}>
-          {trip.locations.map((location, i) => {
+          {trip.locations.map((location, i) => (
             <MapView.Marker
               key={i}
               coordinate={{
@@ -112,8 +112,20 @@ class TripDetails extends Component {
               title={'marker title'}
               description={'marker description'}
             />
-          })}
+          ))}
         </MapView>
+        <View style={{
+          width: 100,
+          height: 100,
+          backgroundColor: colors.orange,
+          position: 'absolute',
+          top: 0,
+          right: 0,
+          left: 0,
+          bottom: 0
+        }}>
+
+        </View>
       </View>
     ]
   }
