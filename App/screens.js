@@ -9,6 +9,7 @@ import ErrorPage from './_defaults/ErrorPage';
 import CarsScreen from './Cars';
 import CarDetails from './Cars/CarDetails';
 import SplashScreen from './_defaults/SplashScreen';
+import SigninScreen from './Signin';
 
 // register all screens of the app (including internal ones)
 export function registerScreens() {
@@ -21,4 +22,5 @@ export function registerScreens() {
   Navigation.registerComponent('RemoteScreen', () => RemoteScreen);
   Navigation.registerComponent('ErrorPage', () => ErrorPage);
   Navigation.registerComponent('SplashScreen', () => SplashScreen);
+  Navigation.registerComponent('SigninScreen', () => SigninScreen);
 }
