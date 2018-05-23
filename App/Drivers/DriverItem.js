@@ -12,6 +12,8 @@ class DriverItem extends Component {
       screen: 'DriverDetails',
       title: 'Driver Details',
       passProps: {id: this.props.driver.driverId},
+      animated: true,
+      animationType: 'slide-horizontal',
       navigatorStyle: {
         tabBarHidden: true,
       }

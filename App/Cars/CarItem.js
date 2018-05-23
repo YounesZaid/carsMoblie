@@ -18,6 +18,8 @@ class CarItem extends Component {
       screen: 'CarDetails',
       title: 'Car details',
       passProps:{id: this.props.car.carId},
+      animated: true,
+      animationType: 'slide-horizontal',
       navigatorStyle: {
         tabBarHidden: true,
       }

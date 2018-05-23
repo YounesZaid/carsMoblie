@@ -14,7 +14,9 @@ class TripItem extends Component {
       passProps: {id: this.props.trip.id},
       navigatorStyle: {
         tabBarHidden: true,
-      }
+      },
+      animated: true,
+      animationType: 'slide-horizontal'
     });
   }
 
