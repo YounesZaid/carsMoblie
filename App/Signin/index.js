@@ -23,7 +23,7 @@ class SigninScreen extends Component {
         justifyContent: 'center',
         alignItems: 'center'
       }}>
-        <Image source={require('_images/logo/position.png')} style={{
+        <Image source={require('_images/logo/pin.png')} style={{
           marginTop: -90,
           marginBottom: 50,
         }} />
