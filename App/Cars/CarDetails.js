@@ -68,7 +68,7 @@ class CarDetails extends Component {
           borderBottomWidth: 1,
           borderBottomColor: '#efefef',
           padding: 10
-        }}>Tesla</Text>
+        }}>{car.carName}</Text>
         <View style={{
           padding: 5,
           flexDirection: 'row',
@@ -137,8 +137,10 @@ const styles = StyleSheet.create({
     marginLeft: 30
   },
   infoDescription: {
+    flex: 1,
     fontSize: 15,
     fontWeight: '200',
+    textAlign: 'center',
     color: colors.orange,
   }
 })
@@ -148,11 +150,12 @@ const Informations = ({ car }) => (
     justifyContent: 'space-evenly',
     flex: 1,
     padding: 5,
-    marginTop: 15,
-    marginRight: 8,
-    marginLeft: 8,
-    marginBottom: 8,
-    backgroundColor: colors.grey
+    // marginTop: 10,
+    // marginRight: 8,
+    // marginLeft: 8,
+    // marginBottom: 8,
+    margin: 8,
+    backgroundColor: colors.grey_dark
   }}>
     <View style={styles.infoContainer}>
       <Text style={styles.infoTitle}>Number of places</Text>
@@ -167,7 +170,7 @@ const Informations = ({ car }) => (
       <Text style={styles.infoDescription}>{car.carType}</Text>
     </View>
     <View style={styles.infoContainer}>
-      <Text style={styles.infoTitle}>Posted</Text>
+      <Text style={styles.infoTitle}>Added at</Text>
       <Text style={styles.infoDescription}>{car.postedCarAt}</Text>
     </View>
   </View>
@@ -176,11 +179,20 @@ const Informations = ({ car }) => (
 const Statistics = () => (
   <ScrollView style={{ flex: 1, }}
     contentContainerStyle={{
-      backgroundColor: colors.grey,
+      backgroundColor: colors.grey_dark,
       alignItems: 'center',
       padding: 10,
+      marginTop: 8,
       // paddingTop: 10,
     }}>
+    <Image source={require('_images/chart.png')} />
+    <Text> Ok </Text>
+    <Text> Ok </Text>
+    <Text> Ok </Text>
+    <Text> Ok </Text>
+    <Text> Ok </Text>
+    <Text> Ok </Text>
+    <Text> Ok </Text>
     <Image source={require('_images/chart.png')} />
   </ScrollView>
 )
