@@ -16,7 +16,7 @@ import * as colors from '_config/colors';
 class CarDetails extends Component {
 
   state = {
-    selectedTab: 'statistics',
+    selectedTab: 'informations',
     car: {},
     isLoading: false
   }
@@ -30,26 +30,26 @@ class CarDetails extends Component {
     });
   }
 
-  // componentDidMount() {
-  //   firestore.collection("cars").doc(this.props.id).onSnapshot((doc) => {
-  //     if (doc.exists) {
-  //       const data = doc.data();
-  //       this.setState({
-  //         car: {
-  //           carName: data.carName,
-  //           carMatricule: data.carMatricule,
-  //           carType: data.carType,
-  //           carPlaces: data.carPlaces,
-  //           postedCarAt: data.postedCarAt,
-  //           carId: doc.id
-  //         },
-  //         isLoading: false
-  //       })
-  //     } else {
-  //       this.handleErrorPage();
-  //     }
-  //   });
-  // }
+  componentDidMount() {
+    firestore.collection("cars").doc(this.props.id).onSnapshot((doc) => {
+      if (doc.exists) {
+        const data = doc.data();
+        this.setState({
+          car: {
+            carName: data.carName,
+            carMatricule: data.carMatricule,
+            carType: data.carType,
+            carPlaces: data.carPlaces,
+            postedCarAt: data.postedCarAt,
+            carId: doc.id
+          },
+          isLoading: false
+        })
+      } else {
+        this.handleErrorPage();
+      }
+    });
+  }
 
   render() {
     const { car, isLoading, selectedTab } = this.state;
@@ -179,21 +179,51 @@ const Informations = ({ car }) => (
 
 class Statistics extends Component {
   render() {
-    const sampleData = [30, 200, 170, 250, 10];
+    const sampleData = [
+      {
+        seriesName: 'series1',
+        data: [
+          { x: 'Janvier', y: 30 },
+          { x: 'Mars', y: 200 },
+          { x: 'Avril', y: 170 },
+          { x: 'Juin', y: 250 },
+          { x: 'Août', y: 10 }
+        ],
+        color: '#297AB1'
+      },
+      {
+        seriesName: 'series2',
+        data: [
+          { x: 'Janvier', y: 20 },
+          { x: 'Mars', y: 100 },
+          { x: 'Avril', y: 140 },
+          { x: 'Juin', y: 550 },
+          { x: 'Août', y: 40 }
+        ],
+        color: colors.grey_dark
+      }
+    ];
     return (
-      <ScrollView style={{ flex: 1, }}
+      <ScrollView 
         contentContainerStyle={{
-          backgroundColor: colors.grey_dark,
-          alignItems: 'center',
-          padding: 10,
+          backgroundColor: colors.white,
+          padding: 3,
           marginTop: 8,
           // paddingTop: 10,
         }}>
+        <Text style={{
+          fontSize: 14,
+          fontWeight: '400',
+          textAlign: 'center',
+          marginTop: 5,
+          color: colors.grey_dark
+        }}> Gasoil consumption by Month (Litter)</Text>
 
         <PureChart
           width={'100%'}
-          height={200}
+          height={220}
           data={sampleData}
+          numberOfYAxisGuideLine={8}
           type='bar' />
       </ScrollView>
     )
