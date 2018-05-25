@@ -8,6 +8,7 @@ import {
   ScrollView,
   ActivityIndicator
 } from 'react-native';
+import PureChart from 'react-native-pure-chart';
 
 import firestore from '_config/database';
 import * as colors from '_config/colors';
@@ -15,9 +16,9 @@ import * as colors from '_config/colors';
 class CarDetails extends Component {
 
   state = {
-    selectedTab: 'informations',
+    selectedTab: 'statistics',
     car: {},
-    isLoading: true
+    isLoading: false
   }
 
   handleErrorPage = () => {
@@ -29,26 +30,26 @@ class CarDetails extends Component {
     });
   }
 
-  componentDidMount() {
-    firestore.collection("cars").doc(this.props.id).onSnapshot((doc) => {
-      if (doc.exists) {
-        const data = doc.data();
-        this.setState({
-          car: {
-            carName: data.carName,
-            carMatricule: data.carMatricule,
-            carType: data.carType,
-            carPlaces: data.carPlaces,
-            postedCarAt: data.postedCarAt,
-            carId: doc.id
-          },
-          isLoading: false
-        })
-      } else {
-        this.handleErrorPage();
-      }
-    });
-  }
+  // componentDidMount() {
+  //   firestore.collection("cars").doc(this.props.id).onSnapshot((doc) => {
+  //     if (doc.exists) {
+  //       const data = doc.data();
+  //       this.setState({
+  //         car: {
+  //           carName: data.carName,
+  //           carMatricule: data.carMatricule,
+  //           carType: data.carType,
+  //           carPlaces: data.carPlaces,
+  //           postedCarAt: data.postedCarAt,
+  //           carId: doc.id
+  //         },
+  //         isLoading: false
+  //       })
+  //     } else {
+  //       this.handleErrorPage();
+  //     }
+  //   });
+  // }
 
   render() {
     const { car, isLoading, selectedTab } = this.state;
@@ -176,24 +177,27 @@ const Informations = ({ car }) => (
   </View>
 )
 
-const Statistics = () => (
-  <ScrollView style={{ flex: 1, }}
-    contentContainerStyle={{
-      backgroundColor: colors.grey_dark,
-      alignItems: 'center',
-      padding: 10,
-      marginTop: 8,
-      // paddingTop: 10,
-    }}>
-    <Image source={require('_images/chart.png')} />
-    <Text> Ok </Text>
-    <Text> Ok </Text>
-    <Text> Ok </Text>
-    <Text> Ok </Text>
-    <Text> Ok </Text>
-    <Text> Ok </Text>
-    <Text> Ok </Text>
-    <Image source={require('_images/chart.png')} />
-  </ScrollView>
-)
+class Statistics extends Component {
+  render() {
+    const sampleData = [30, 200, 170, 250, 10];
+    return (
+      <ScrollView style={{ flex: 1, }}
+        contentContainerStyle={{
+          backgroundColor: colors.grey_dark,
+          alignItems: 'center',
+          padding: 10,
+          marginTop: 8,
+          // paddingTop: 10,
+        }}>
+
+        <PureChart
+          width={'100%'}
+          height={200}
+          data={sampleData}
+          type='bar' />
+      </ScrollView>
+    )
+  }
+}
+
 export default CarDetails;
