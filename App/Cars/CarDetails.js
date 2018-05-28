@@ -156,7 +156,7 @@ const Informations = ({ car }) => (
     // marginLeft: 8,
     // marginBottom: 8,
     margin: 8,
-    backgroundColor: colors.grey_dark
+    backgroundColor: colors.grey
   }}>
     <View style={styles.infoContainer}>
       <Text style={styles.infoTitle}>Number of places</Text>

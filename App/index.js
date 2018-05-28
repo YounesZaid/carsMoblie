@@ -5,17 +5,17 @@ import * as colors from '_config/colors';
 
 registerScreens(); // this is where you register all of your app's screens
 
-// renderSplashScreen();
+renderSplashScreen();
 
-// setTimeout(() => {
-//   renderSigninScreen()
-// }, 1000)
+setTimeout(() => {
+  renderSigninScreen()
+}, 1000)
 
-// setTimeout(() => {
-//   renderApplication()
-// }, 2000)
+setTimeout(() => {
+  renderApplication()
+}, 4000)
 
-// renderApplication = () => {
+renderApplication = () => {
 
   const tabsStyle = {
     tabBarButtonColor: colors.grey_icon, // optional, change the color of the tab icons and text (also unselected)
@@ -63,7 +63,7 @@ registerScreens(); // this is where you register all of your app's screens
     appStyle: tabsStyle,
     animationType: 'none'
   });
-// }
+}
 
 function renderSplashScreen() {
   Navigation.startSingleScreenApp({

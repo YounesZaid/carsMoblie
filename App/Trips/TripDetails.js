@@ -14,7 +14,8 @@ class TripDetails extends Component {
 
   state = {
     trip: null,
-    isLoading: true
+    isLoading: true,
+    mapType: 'standard'
   }
 
   handleErrorPage = () => {
@@ -83,7 +84,7 @@ class TripDetails extends Component {
   }
 
   render() {
-    const { isLoading, trip} = this.state;
+    const { isLoading, trip, mapType } = this.state;
 
     if (isLoading) {
       return [
@@ -94,7 +95,14 @@ class TripDetails extends Component {
     return [
       <View key={1} style={styles.container}>
         <MapView style={styles.map}
-          mapType='standard'
+          mapType={mapType}
+          showsMyLocationButton={true}
+          showsUserLocation={true}
+          showsBuildings={true}
+          showsTraffic={true}
+          showsIndoors={true}
+          showsCompass={true}
+          loadingEnabled={true}
           zoomEnabled={true}
           initialRegion={{
             latitude: 34.0132500,
@@ -109,6 +117,7 @@ class TripDetails extends Component {
                 latitude: location.latitude,
                 longitude: location.longitude,
               }}
+              // image={require('_images/icons/map/marker.png')}
               title={'marker title'}
               description={'marker description'}
             />
@@ -117,11 +126,12 @@ class TripDetails extends Component {
         <View style={{
           width: 100,
           height: 100,
-          backgroundColor: colors.orange,
+          backgroundColor: colors.white,
           position: 'absolute',
-          top: 0,
+          borderRadius: 2,
+          top: 10,
           right: 0,
-          left: 0,
+          left: 10,
           bottom: 0
         }}>
 
