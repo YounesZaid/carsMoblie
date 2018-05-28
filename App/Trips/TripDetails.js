@@ -3,9 +3,11 @@ import {
   View,
   Text,
   StyleSheet,
-  ActivityIndicator
+  ActivityIndicator,
+  TouchableOpacity
 } from 'react-native';
 import MapView from 'react-native-maps';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import firestore from '_config/database';
 import * as colors from '_config/colors'
@@ -25,6 +27,21 @@ class TripDetails extends Component {
         tabBarHidden: true,
       }
     });
+  }
+
+  showMapModal = () => {
+    this.props.navigator.showModal({
+      screen: 'MapDetails',
+      title: 'infos',
+      navigatorStyle: {
+        navBarHidden: true,
+      },
+      passProps: {
+        trip: this.state.trip
+      },
+      animated: true,
+      animationType: 'slide-horizontal'
+    })
   }
 
   componentDidMount() {
@@ -98,12 +115,16 @@ class TripDetails extends Component {
           mapType={mapType}
           showsMyLocationButton={true}
           showsUserLocation={true}
-          showsBuildings={true}
-          showsTraffic={true}
           showsIndoors={true}
           showsCompass={true}
           loadingEnabled={true}
           zoomEnabled={true}
+          // onPress={e => {
+          //   alert("onPress");
+          // }}
+          onMarkerPress={e => {
+            this.showMapModal();
+          }}
           initialRegion={{
             latitude: 34.0132500,
             longitude: -6.8325500,
@@ -117,25 +138,12 @@ class TripDetails extends Component {
                 latitude: location.latitude,
                 longitude: location.longitude,
               }}
-              // image={require('_images/icons/map/marker.png')}
-              title={'marker title'}
-              description={'marker description'}
-            />
+            // image={require('_images/icons/map/marker.png')}
+            >
+              <CustomMarker />
+            </MapView.Marker>
           ))}
         </MapView>
-        <View style={{
-          width: 100,
-          height: 100,
-          backgroundColor: colors.white,
-          position: 'absolute',
-          borderRadius: 2,
-          top: 10,
-          right: 0,
-          left: 10,
-          bottom: 0
-        }}>
-
-        </View>
       </View>
     ]
   }
@@ -159,5 +167,13 @@ const styles = StyleSheet.create({
     bottom: 0,
   },
 });
+
+const CustomMarker = () => {
+  return (
+    <TouchableOpacity>
+      <Icon name={'md-pin'} size={50} color={colors.orange} />
+    </TouchableOpacity>
+  )
+}
 
 export default TripDetails;

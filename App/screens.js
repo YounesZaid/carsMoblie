@@ -3,6 +3,7 @@ import { Navigation } from 'react-native-navigation';
 import RemoteScreen from './Remote/';
 import TripsScreen from './Trips/';
 import TripDetails from './Trips/TripDetails';
+import MapDetails from './Trips/MapDetails';
 import DriversScreen from './Drivers/';
 import DriverDetails from './Drivers/DriverDetails';
 import ErrorPage from './_defaults/ErrorPage';
@@ -15,6 +16,7 @@ import SigninScreen from './Signin';
 export function registerScreens() {
   Navigation.registerComponent('TripsScreen', () => TripsScreen);
   Navigation.registerComponent('TripDetails', () => TripDetails);
+  Navigation.registerComponent('MapDetails', () => MapDetails);
   Navigation.registerComponent('DriversScreen', () => DriversScreen);
   Navigation.registerComponent('DriverDetails', () => DriverDetails);
   Navigation.registerComponent('CarsScreen', () => CarsScreen);

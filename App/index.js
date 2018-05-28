@@ -5,27 +5,39 @@ import * as colors from '_config/colors';
 
 registerScreens(); // this is where you register all of your app's screens
 
-renderSplashScreen();
+// renderSplashScreen();
 
-setTimeout(() => {
-  renderSigninScreen()
-}, 1000)
+// setTimeout(() => {
+//   renderSigninScreen()
+// }, 1000)
 
-setTimeout(() => {
-  renderApplication()
-}, 4000)
+// setTimeout(() => {
+//   renderApplication()
+// }, 4000)
 
-renderApplication = () => {
+// renderApplication = () => {
 
   const tabsStyle = {
     tabBarButtonColor: colors.grey_icon, // optional, change the color of the tab icons and text (also unselected)
     tabBarSelectedButtonColor: colors.orange, // optional, change the color of the selected tab icon and text (only selected)
-    tabBarBackgroundColor: colors.white, // optional, change the background color of the tab bar
+    tabBarBackgroundColor: '#F5F5F5', // optional, change the background color of the tab bar
     initialTabIndex: 0, // optional, the default selected bottom tab. Default: 0
     forceTitlesDisplay: true,
     // tabBarCollapseOnScroll: true,
     // navBarHideOnScroll: true,
     statusBarHideWithNavBar: true,
+  };
+
+  const iconInsets = { // add this to change icon position (optional, iOS only).
+    top: 6, // optional, default is 0.
+    left: 0, // optional, default is 0.
+    bottom: -6, // optional, default is 0.
+    right: 0 // optional, default is 0.
+  };
+
+  const navigatorStyle = {
+    navBarTextColor: colors.dark,
+    navBarBackgroundColor: '#F5F5F5',
   };
 
   // start the app
@@ -37,6 +49,7 @@ renderApplication = () => {
         icon: require('_images/tab-icons/pin.png'),
         selectedIcon: require('_images/tab-icons/driver.png'), // iOS only
         title: 'Trips list',
+        navigatorStyle
       },
       {
         label: 'Drivers',
@@ -44,6 +57,7 @@ renderApplication = () => {
         icon: require('_images/tab-icons/driver.png'),
         selectedIcon: require('_images/tab-icons/driver-s.png'), // iOS only
         title: 'Drivers list',
+        navigatorStyle
       },
       {
         label: 'Cars',
@@ -51,6 +65,7 @@ renderApplication = () => {
         icon: require('_images/tab-icons/car.png'),
         selectedIcon: require('_images/tab-icons/car-s.png'), // iOS only
         title: 'Cars list',
+        navigatorStyle
       },
       {
         label: 'Remote',
@@ -58,12 +73,13 @@ renderApplication = () => {
         icon: require('_images/tab-icons/remote.png'),
         selectedIcon: require('_images/tab-icons/remote-s.png'), // iOS only
         title: 'Car remote',
+        navigatorStyle
       },
     ],
     appStyle: tabsStyle,
     animationType: 'none'
   });
-}
+// }
 
 function renderSplashScreen() {
   Navigation.startSingleScreenApp({
