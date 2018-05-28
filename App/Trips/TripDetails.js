@@ -39,9 +39,15 @@ class TripDetails extends Component {
       passProps: {
         trip: this.state.trip
       },
-      animated: true,
-      animationType: 'slide-horizontal'
+      animationType: 'slide-up'
     })
+  }
+
+  goBack = () => {
+    this.props.navigator.pop({
+      animated: true, // does the pop have transition animation or does it happen immediately (optional)
+      animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the pop have different transition animation (optional)
+    });
   }
 
   componentDidMount() {
@@ -144,6 +150,15 @@ class TripDetails extends Component {
             </MapView.Marker>
           ))}
         </MapView>
+        <TouchableOpacity style={{
+            position: 'absolute',
+            top: 10,
+            left: 15,
+          }} onPress={e => {
+            this.goBack();
+        }}>
+          <Icon name='ios-arrow-round-back-outline' size={45} color={colors.dark} />
+        </TouchableOpacity>
       </View>
     ]
   }

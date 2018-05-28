@@ -11,10 +11,12 @@ import CarsScreen from './Cars';
 import CarDetails from './Cars/CarDetails';
 import SplashScreen from './_defaults/SplashScreen';
 import SigninScreen from './Signin';
+import CustomButton from './_config/ui/CustomButton';
 
 // register all screens of the app (including internal ones)
 export function registerScreens() {
   Navigation.registerComponent('TripsScreen', () => TripsScreen);
+  Navigation.registerComponent('CustomButton', () => CustomButton);
   Navigation.registerComponent('TripDetails', () => TripDetails);
   Navigation.registerComponent('MapDetails', () => MapDetails);
   Navigation.registerComponent('DriversScreen', () => DriversScreen);

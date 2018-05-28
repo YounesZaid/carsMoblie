@@ -14,6 +14,7 @@ class TripItem extends Component {
       passProps: {id: this.props.trip.id},
       navigatorStyle: {
         tabBarHidden: true,
+        navBarHidden: true,
       },
       animated: true,
       animationType: 'slide-horizontal'
@@ -43,7 +44,7 @@ class TripItem extends Component {
             }}>{trip.driverLastName}</Text>
           </View>
           <View style={styles.infosContainer}>
-            <Icon name='ios-car-outline' size={25} />
+            <Icon name='md-car' size={25} />
             <Text style={styles.textStyle}>{trip.carName}</Text>
           </View>
           <View style={styles.infosContainer}>

@@ -5,9 +5,12 @@ import {
   Image,
   StyleSheet,
   ScrollView,
-  ActivityIndicator
+  ActivityIndicator,
+  TouchableOpacity
 } from 'react-native';
 import MapView from 'react-native-maps';
+import Icon from 'react-native-vector-icons/Ionicons';
+
 
 import firestore from '_config/database';
 import * as colors from '_config/colors';
@@ -24,6 +27,13 @@ class DriverDetails extends Component {
       navigatorStyle: {
         tabBarHidden: true,
       }
+    });
+  }
+
+  goBack = () => {
+    this.props.navigator.pop({
+      animated: true, // does the pop have transition animation or does it happen immediately (optional)
+      animationType: 'fade', // 'fade' (for both) / 'slide-horizontal' (for android) does the pop have different transition animation (optional)
     });
   }
 
@@ -78,7 +88,7 @@ class DriverDetails extends Component {
               flexDirection: 'row',
               justifyContent: 'center',
               marginBottom: 5
-              
+
             }}>
               <Text style={{
                 fontSize: 18,
@@ -145,7 +155,16 @@ class DriverDetails extends Component {
             </MapView>
           </View>
         </View>
-      </ScrollView>
+      </ScrollView>,
+      <TouchableOpacity key={2} style={{
+        position: 'absolute',
+        top: 10,
+        left: 15,
+      }} onPress={e => {
+        this.goBack();
+      }}>
+        <Icon name='ios-arrow-round-back-outline' size={45} color={colors.dark} />
+      </TouchableOpacity>
     ]
   }
 }

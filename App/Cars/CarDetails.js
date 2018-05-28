@@ -9,6 +9,7 @@ import {
   ActivityIndicator
 } from 'react-native';
 import PureChart from 'react-native-pure-chart';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 import firestore from '_config/database';
 import * as colors from '_config/colors';
@@ -27,6 +28,13 @@ class CarDetails extends Component {
       navigatorStyle: {
         tabBarHidden: true,
       }
+    });
+  }
+
+  goBack = () => {
+    this.props.navigator.pop({
+      animated: true, 
+      animationType: 'slide-up', 
     });
   }
 
@@ -99,6 +107,15 @@ class CarDetails extends Component {
         </View>
         {selectedTab === 'informations' && <Informations car={car} />}
         {selectedTab === 'statistics' && <Statistics />}
+        <TouchableOpacity key={2} style={{
+          position: 'absolute',
+          top: 10,
+          left: 15,
+        }} onPress={e => {
+          this.goBack();
+        }}>
+          <Icon name='ios-arrow-round-back-outline' size={45} color={colors.dark} />
+        </TouchableOpacity>
       </View>
     ]
   }
@@ -204,7 +221,7 @@ class Statistics extends Component {
       }
     ];
     return (
-      <ScrollView 
+      <ScrollView
         contentContainerStyle={{
           backgroundColor: colors.white,
           padding: 3,

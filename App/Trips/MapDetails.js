@@ -38,7 +38,7 @@ class MapDetails extends Component {
             <Text style={styles.textStyle}>{trip.driverPhoneNumber}</Text>
           </View>
           <View style={styles.infoContainer}>
-            <Icon name='ios-car' size={35} style={styles.iconStyle}/>
+            <Icon name='md-car' size={35} style={styles.iconStyle}/>
             <Text style={styles.textStyle}>{trip.carName}</Text>
           </View>
           <View style={styles.infoContainer}>

@@ -22,6 +22,7 @@ class CarItem extends Component {
       animationType: 'slide-horizontal',
       navigatorStyle: {
         tabBarHidden: true,
+        navBarHidden: true
       }
     })
   }

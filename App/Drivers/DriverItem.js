@@ -16,6 +16,7 @@ class DriverItem extends Component {
       animationType: 'slide-horizontal',
       navigatorStyle: {
         tabBarHidden: true,
+        navBarHidden: true
       }
     });
   }
