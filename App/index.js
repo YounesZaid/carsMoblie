@@ -49,17 +49,17 @@ registerScreens(); // this is where you register all of your app's screens
         icon: require('_images/tab-icons/pin.png'),
         selectedIcon: require('_images/tab-icons/driver.png'), // iOS only
         title: 'Trips list',
-        navigatorButtons: {
-          rightButtons: [
-            {
-              id: 'custom-button',
-              component: 'CustomButton', // This line loads our component as a nav bar button item
-              passProps: {
-                text: 'Hi!',
-              },
-            },
-          ],
-        },
+        // navigatorButtons: {
+        //   rightButtons: [
+        //     {
+        //       id: 'custom-button',
+        //       component: 'CustomButton', // This line loads our component as a nav bar button item
+        //       passProps: {
+        //         text: 'Hi!',
+        //       },
+        //     },
+        //   ],
+        // },
         navigatorStyle
       },
       {

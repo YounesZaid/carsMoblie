@@ -7,111 +7,42 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-import MapView, { Marker, ProviderPropType } from 'react-native-maps';
-
 const { width, height } = Dimensions.get('window');
-
-const ASPECT_RATIO = width / height;
-const LATITUDE = 34.0132500;
-const LONGITUDE = -6.8325500;
-const LATITUDE_DELTA = 0.0922;
-const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-let id = 0;
 
 class RemoteScreen extends Component {
 
+  static navigatorButtons = {
+    rightButtons: [
+      {
+        icon: require('_images/nav-icons/filter.png'),
+        id: 'filter' // id for this button, given in onNavigatorEvent(event) to help understand which button was clicked
+      }
+    ]
+  };
+
   constructor(props) {
     super(props);
-
-    this.state = {
-      region: {
-        latitude: LATITUDE,
-        longitude: LONGITUDE,
-        latitudeDelta: LATITUDE_DELTA,
-        longitudeDelta: LONGITUDE_DELTA,
-      },
-      markers: [],
-    };
-
-    this.onMapPress = this.onMapPress.bind(this);
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent.bind(this));
   }
 
-  onMapPress(e) {
-    this.setState({
-      markers: [
-        ...this.state.markers,
-        {
-          coordinate: e.nativeEvent.coordinate,
-          key: `foo${id++}`,
-        },
-      ],
-    });
+  onNavigatorEvent(event) { // this is the onPress handler for the two buttons together
+    if (event.type == 'NavBarButtonPress') { // this is the event type for button presses
+      if (event.id == 'edit') { // this is the same id field from the static navigatorButtons definition
+        alert('NavBar', 'Edit button pressed');
+      }
+      if (event.id == 'filter') {
+        alert('NavBar');
+      }
+    }
   }
   render() {
     return (
-      <View style={styles.container}>
-        <MapView
-          provider={this.props.provider}
-          style={styles.map}
-          initialRegion={this.state.region}
-          onPress={this.onMapPress}
-        >
-          {this.state.markers.map(marker => (
-            <Marker
-              title={marker.key}
-              // image={require('_images/logo/pin.png')}
-              key={marker.key}
-              coordinate={marker.coordinate}
-            />
-          ))}
-        </MapView>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity
-            onPress={() => this.setState({ markers: [] })}
-            style={styles.bubble}
-          >
-            <Text>Tap to create a marker of random color</Text>
-          </TouchableOpacity>
-        </View>
+      <View>
+        
       </View>
     );
   }
 }
 
-RemoteScreen.propTypes = {
-  provider: ProviderPropType,
-};
-
-const styles = StyleSheet.create({
-  container: {
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: 'flex-end',
-    alignItems: 'center',
-  },
-  map: {
-    ...StyleSheet.absoluteFillObject,
-  },
-  bubble: {
-    backgroundColor: 'rgba(255,255,255,0.7)',
-    paddingHorizontal: 18,
-    paddingVertical: 12,
-    borderRadius: 20,
-  },
-  latlng: {
-    width: 200,
-    alignItems: 'stretch',
-  },
-  button: {
-    width: 80,
-    paddingHorizontal: 12,
-    alignItems: 'center',
-    marginHorizontal: 10,
-  },
-  buttonContainer: {
-    flexDirection: 'row',
-    marginVertical: 20,
-    backgroundColor: 'transparent',
-  },
-});
 
 export default RemoteScreen;

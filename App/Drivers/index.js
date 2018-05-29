@@ -12,10 +12,33 @@ import DriverItem from './DriverItem';
 import * as colors from '_config/colors';
 
 export default class DriversScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      drivers: [],
+      isLoading: true
+    }
+    this.props.navigator.setOnNavigatorEvent(this.onNavigatorEvent);
+  }
 
-  state = {
-    drivers: [],
-    isLoading: true
+  static navigatorButtons = {
+    rightButtons: [
+      {
+        icon: require('_images/nav-icons/filter.png'), 
+        id: 'filter' // id for this button, given in onNavigatorEvent(event) to help understand which button was clicked
+      }
+    ]
+  }
+
+  onNavigatorEvent = (event) => { // this is the onPress handler for the two buttons together
+    if (event.type == 'NavBarButtonPress') { // this is the event type for button presses
+      if (event.id == 'edit') { // this is the same id field from the static navigatorButtons definition
+        alert('NavBar', 'Edit button pressed');
+      }
+      if (event.id == 'filter') {
+        alert('NavBar', 'Add button pressed');
+      }
+    }
   }
 
   componentDidMount() {
