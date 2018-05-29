@@ -36,9 +36,22 @@ export default class DriversScreen extends Component {
         alert('NavBar', 'Edit button pressed');
       }
       if (event.id == 'filter') {
-        alert('NavBar', 'Add button pressed');
+        this.showFilterBox();
       }
     }
+  }
+
+  showFilterBox = () => {
+    this.props.navigator.showLightBox({
+      screen: "FilterBox", // unique ID registered with Navigation.registerScreen
+      passProps: {}, // simple serializable object that will pass as props to the lightbox (optional)
+      style: {
+        backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
+        backgroundColor: "rgba(0, 0, 0, 0.4)", // tint color for the background, you can specify alpha here (optional)
+        tapBackgroundToDismiss: true // dismisses LightBox on background taps (optional)
+      },
+      adjustSoftInput: "nothing", // android only, adjust soft input, modes: 'nothing', 'pan', 'resize', 'unspecified' (optional, default 'unspecified')
+     });
   }
 
   componentDidMount() {
