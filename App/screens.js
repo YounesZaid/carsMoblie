@@ -1,16 +1,16 @@
 import { Navigation } from 'react-native-navigation';
 
-import RemoteScreen from './Remote/';
 import TripsScreen from './Trips/';
 import TripDetails from './Trips/TripDetails';
 import MapDetails from './Trips/MapDetails';
 import DriversScreen from './Drivers/';
 import DriverDetails from './Drivers/DriverDetails';
+import ProfileScreen from './Profile/ProfileScreen';
+import SigninScreen from './Profile/SigninScreen';
 import ErrorPage from './_defaults/ErrorPage';
 import CarsScreen from './Cars';
 import CarDetails from './Cars/CarDetails';
 import SplashScreen from './_defaults/SplashScreen';
-import SigninScreen from './Signin';
 import CustomButton from './_config/ui/CustomButton';
 import FilterBox from './_config/ui/FilterBox';
 
@@ -23,10 +23,10 @@ export function registerScreens() {
   Navigation.registerComponent('DriverDetails', () => DriverDetails);
   Navigation.registerComponent('CarsScreen', () => CarsScreen);
   Navigation.registerComponent('CarDetails', () => CarDetails);
-  Navigation.registerComponent('RemoteScreen', () => RemoteScreen);
+  Navigation.registerComponent('ProfileScreen', () => ProfileScreen);
+  Navigation.registerComponent('SigninScreen', () => SigninScreen);
   Navigation.registerComponent('ErrorPage', () => ErrorPage);
   Navigation.registerComponent('SplashScreen', () => SplashScreen);
-  Navigation.registerComponent('SigninScreen', () => SigninScreen);
   Navigation.registerComponent('CustomButton', () => CustomButton);
   Navigation.registerComponent('FilterBox', () => FilterBox);
 }

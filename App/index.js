@@ -1,21 +1,37 @@
 import { Navigation } from 'react-native-navigation';
+import * as firebase from 'firebase';
 
 import { registerScreens } from './screens';
 import * as colors from '_config/colors';
 
 registerScreens(); // this is where you register all of your app's screens
 
-// renderSplashScreen();
+renderSplashScreen();
 
-// setTimeout(() => {
-//   renderSigninScreen()
-// }, 1000)
+
+startApp = () => {
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      // User is signed in.
+  
+      renderApplication();
+  
+    } else {
+      // User is signed out.
+      renderSigninScreen();
+      // alert('signed out');
+    }
+  });
+}
+setTimeout(() => {
+  startApp();
+}, 2000)
 
 // setTimeout(() => {
 //   renderApplication()
 // }, 4000)
 
-// renderApplication = () => {
+renderApplication = () => {
 
   const tabsStyle = {
     tabBarButtonColor: colors.grey_icon, // optional, change the color of the tab icons and text (also unselected)
@@ -79,18 +95,18 @@ registerScreens(); // this is where you register all of your app's screens
         navigatorStyle
       },
       {
-        label: 'Remote',
-        screen: 'RemoteScreen',
+        label: 'Profile',
+        screen: 'ProfileScreen',
         icon: require('_images/tab-icons/remote.png'),
         selectedIcon: require('_images/tab-icons/remote-s.png'), // iOS only
-        title: 'Car remote',
+        title: 'Manage profile',
         navigatorStyle
       },
     ],
     appStyle: tabsStyle,
     animationType: 'none'
   });
-// }
+}
 
 function renderSplashScreen() {
   Navigation.startSingleScreenApp({

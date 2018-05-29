@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Navigation } from 'react-native-navigation';
 import {
   View,
   Text,
@@ -8,13 +9,40 @@ import {
   TextInput,
   TouchableOpacity
 } from 'react-native';
+import * as firebase from 'firebase';
 
 import * as colors from '_config/colors';
 
 const window = Dimensions.get('window');
+const auth = firebase.auth();
 
 class SigninScreen extends Component {
+
+  state = {
+    email: '',
+    password: ''
+  }
+
+  signIn = (email,password) => {
+    auth.signInWithEmailAndPassword(email, password).then(() => {
+      Navigation.startTabBasedApp();
+    })
+    .catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // ...
+      if (errorCode === 'auth/wrong-password') {
+        alert('Wrong password.');
+      } else {
+        alert(errorMessage);
+      }
+      // alert('welcome back');
+    });
+  }
+
   render() {
+    const { email, password } = this.state;
     return (
       <ImageBackground source={require('_images/background/background.png')} style={{
         width: window.width,
@@ -38,7 +66,14 @@ class SigninScreen extends Component {
             marginBottom: 8,
             paddingLeft: 12,
             paddingRight: 12,
-          }} underlineColorAndroid={'transparent'} />
+          }} underlineColorAndroid={'transparent'}
+          onChangeText={(value) => {
+            this.setState({
+              email: value
+            })
+          }}
+          value={email}
+          autoCapitalize='none' />
         <TextInput placeholder='*******' keyboardType='default' secureTextEntry={true}
           style={{
             fontSize: 14,
@@ -50,7 +85,14 @@ class SigninScreen extends Component {
             marginBottom: 30,
             paddingLeft: 12,
             paddingRight: 12,
-          }} underlineColorAndroid={'transparent'} />
+          }} underlineColorAndroid={'transparent'}
+          onChangeText={(value) => {
+            this.setState({
+              password: value
+            });
+          }}
+          value={password}
+          autoCapitalize='none' />
         <TouchableOpacity activeOpacity={.8} style={{
           alignItems: 'center',
           justifyContent: 'center',
@@ -59,7 +101,14 @@ class SigninScreen extends Component {
           borderRadius: 2,
           // marginBottom: 10,
           padding: 12,
-        }} onPress={() => {alert('Sign in');}}>
+        }} onPress={() => {
+          // alert('Sign in' + email + '' + password);
+          this.signIn(email,password);
+          this.setState({
+            email: '',
+            password: ''
+          })
+        }}>
           <Text style={{
             color: '#FFFFFF',
             fontSize: 14,
