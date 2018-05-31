@@ -7,6 +7,7 @@ import DriversScreen from './Drivers/';
 import DriverDetails from './Drivers/DriverDetails';
 import ProfileScreen from './Profile/ProfileScreen';
 import SigninScreen from './Profile/SigninScreen';
+import ResetPassword from './Profile/ResetPassword';
 import ErrorPage from './_defaults/ErrorPage';
 import CarsScreen from './Cars';
 import CarDetails from './Cars/CarDetails';
@@ -25,6 +26,7 @@ export function registerScreens() {
   Navigation.registerComponent('CarDetails', () => CarDetails);
   Navigation.registerComponent('ProfileScreen', () => ProfileScreen);
   Navigation.registerComponent('SigninScreen', () => SigninScreen);
+  Navigation.registerComponent('ResetPassword', () => ResetPassword);
   Navigation.registerComponent('ErrorPage', () => ErrorPage);
   Navigation.registerComponent('SplashScreen', () => SplashScreen);
   Navigation.registerComponent('CustomButton', () => CustomButton);

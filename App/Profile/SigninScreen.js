@@ -21,10 +21,16 @@ class SigninScreen extends Component {
 
   state = {
     email: 'zaidyounes94@gmail.com',
-    password: 'root123',
+    password: 'rootroot',
     errorEmail: '',
     errorPassword:'',
     isSignedIn: false
+  }
+
+  showLoader = () => {
+    this.setState({
+      isSignedIn: !this.state.isSignedIn
+    })
   }
 
   signIn = (email, password) => {
@@ -32,14 +38,16 @@ class SigninScreen extends Component {
       // alert('Signed in');
       console.ignoredYellowBox = ['Setting a timer'];
     })
-      .catch(function (error) {
+      .catch((error) => {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
         // ...
         if (errorCode === 'auth/wrong-password') {
+          this.showLoader();
           alert('Wrong password.');
         } else {
+          this.showLoader();
           alert(errorMessage);
         }
       });
@@ -47,7 +55,7 @@ class SigninScreen extends Component {
 
   showForgotPassdModal = () => {
     this.props.navigator.showModal({
-      screen: 'ResetPasswordModal',
+      screen: 'ResetPassword',
       title: 'passReset',
       navigatorStyle: {
         navBarHidden: true,
@@ -122,10 +130,10 @@ class SigninScreen extends Component {
           }} onPress={() => {
             // alert('Sign in' + email + '' + password);
             this.signIn(email, password);
+            this.showLoader();
             this.setState({
               email: '',
               password: '',
-              isSignedIn: true
             })
           }}>
             <Text style={{
@@ -138,7 +146,7 @@ class SigninScreen extends Component {
             marginTop: 10,
           }} onPress={() => {
             this.showForgotPassdModal();
-            alert('an email has been sent to you with password reset instructions')
+            // alert('an email has been sent to you with password reset instructions')
           }}>
             <Text style={{
               fontSize: 14,
