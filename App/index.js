@@ -29,13 +29,13 @@ startApp = () => {
   });
 }
 
-renderApplication = () => {
+function renderApplication() {
 
   const tabsStyle = {
     tabBarButtonColor: colors.grey_icon, // optional, change the color of the tab icons and text (also unselected)
     tabBarSelectedButtonColor: colors.orange, // optional, change the color of the selected tab icon and text (only selected)
     tabBarBackgroundColor: '#F5F5F5', // optional, change the background color of the tab bar
-    initialTabIndex: 0, // optional, the default selected bottom tab. Default: 0
+    initialTabIndex: 3, // optional, the default selected bottom tab. Default: 0
     forceTitlesDisplay: true,
     // tabBarCollapseOnScroll: true,
     // navBarHideOnScroll: true,
@@ -95,8 +95,8 @@ renderApplication = () => {
       {
         label: 'Profile',
         screen: 'ProfileScreen',
-        icon: require('_images/tab-icons/remote.png'),
-        selectedIcon: require('_images/tab-icons/remote-s.png'), // iOS only
+        icon: require('_images/tab-icons/profile.png'),
+        selectedIcon: require('_images/tab-icons/profile-s.png'), // iOS only
         title: 'Manage profile',
         navigatorStyle
       },
