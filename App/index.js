@@ -6,7 +6,13 @@ import * as colors from '_config/colors';
 
 registerScreens(); // this is where you register all of your app's screens
 
-renderSplashScreen();
+renderSigninScreen();
+// renderSplashScreen();
+
+// setTimeout(() => {
+//   startApp();
+// }, 1000)
+
 
 
 startApp = () => {
@@ -23,13 +29,6 @@ startApp = () => {
     }
   });
 }
-setTimeout(() => {
-  startApp();
-}, 2000)
-
-// setTimeout(() => {
-//   renderApplication()
-// }, 4000)
 
 renderApplication = () => {
 

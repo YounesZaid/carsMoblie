@@ -6,6 +6,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from 'react-native';
+import * as firebase from 'firebase';
 
 import * as colors from '_config/colors'
 
@@ -40,11 +41,9 @@ class RemoteScreen extends Component {
 
   onNavigatorEvent(event) { // this is the onPress handler for the two buttons together
     if (event.type == 'NavBarButtonPress') { // this is the event type for button presses
-      if (event.id == 'edit') { // this is the same id field from the static navigatorButtons definition
-        alert('NavBar', 'Edit button pressed');
-      }
       if (event.id == 'signOut') {
-        alert('Go Out');
+        // alert('Go Out');
+        firebase.auth().signOut();
       }
     }
   }
