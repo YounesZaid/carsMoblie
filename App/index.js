@@ -8,19 +8,13 @@ registerScreens(); // this is where you register all of your app's screens
 
 renderSplashScreen();
 
-setTimeout(() => {
-  startApp();
-}, 1000)
-
-
-
-startApp = () => {
+const startApp = () => {
+  // renderSigninScreen();
+  // return
   firebase.auth().onAuthStateChanged((user) => {
     if (user) {
       // User is signed in.
-  
       renderApplication();
-  
     } else {
       // User is signed out.
       renderSigninScreen();
@@ -29,13 +23,17 @@ startApp = () => {
   });
 }
 
+setTimeout(() => {
+  startApp();
+}, 2000)
+
 function renderApplication() {
 
   const tabsStyle = {
     tabBarButtonColor: colors.grey_icon, // optional, change the color of the tab icons and text (also unselected)
     tabBarSelectedButtonColor: colors.orange, // optional, change the color of the selected tab icon and text (only selected)
     tabBarBackgroundColor: '#F5F5F5', // optional, change the background color of the tab bar
-    initialTabIndex: 3, // optional, the default selected bottom tab. Default: 0
+    initialTabIndex: 0, // optional, the default selected bottom tab. Default: 0
     forceTitlesDisplay: true,
     // tabBarCollapseOnScroll: true,
     // navBarHideOnScroll: true,

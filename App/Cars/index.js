@@ -45,7 +45,11 @@ class CarsScreen extends Component {
   showFilterBox = () => {
     this.props.navigator.showLightBox({
       screen: "FilterBox", // unique ID registered with Navigation.registerScreen
-      passProps: {}, // simple serializable object that will pass as props to the lightbox (optional)
+      passProps: {
+        onFilter: (filter) => {
+          alert(filter)
+        }
+      }, // simple serializable object that will pass as props to the lightbox (optional)
       style: {
         backgroundBlur: "dark", // 'dark' / 'light' / 'xlight' / 'none' - the type of blur on the background
         backgroundColor: "rgba(0, 0, 0, 0.4)", // tint color for the background, you can specify alpha here (optional)

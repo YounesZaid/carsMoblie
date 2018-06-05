@@ -21,13 +21,15 @@ class FilterBox extends Component {
         padding: 10
       }}>
         <TouchableOpacity style={styles.button} activeOpacity={0.5} onPress={() => {
-          alert('Filtred !');
+          // dismiss modal
+          this.props.onFilter('name');
         }}>
           <Icon name='ios-funnel-outline' size={20} color={colors.blue_text}/>
           <Text style={styles.textStyle}> Filter by Name</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.button} activeOpacity={0.5} onPress={() => {
-          alert('Filtred !');
+          // dismiss modal
+          this.props.onFilter('date');
         }}>
           <Icon name='ios-funnel-outline' size={20} color={colors.blue_text}/>
           <Text style={styles.textStyle}> Filter by date</Text>

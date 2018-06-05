@@ -34,8 +34,9 @@ class SigninScreen extends Component {
   }
 
   signIn = (email, password) => {
-    auth.signInWithEmailAndPassword(email, password).then(() => {
+    auth.signInWithEmailAndPassword(email, password).then((data) => {
       // alert('Signed in');
+      alert(JSON.stringify(data));
       console.ignoredYellowBox = ['Setting a timer'];
     })
       .catch((error) => {
